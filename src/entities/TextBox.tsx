@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { extend } from 'react-three-fiber';
+import { Text } from 'drei';
 import GameObject, { GameObjectProps } from '../@core/GameObject';
 import Sprite from '../@core/Sprite';
 
@@ -15,6 +16,9 @@ export default function TextBox(props: GameObjectProps) {
         <GameObject name="player" displayName="Player" layer="fx" {...props}>
             {/* <TextScript> */}
             <Sprite {...spriteData.player} />
+            {/* <Text color="black" anchorX="center" anchorY="middle">
+                hello world!
+            </Text> */}
             {/* </TextScript> */}
         </GameObject>
     );

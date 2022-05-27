@@ -13,6 +13,8 @@ module.exports = {
                 'no-await-in-loop': 'off',
                 'no-restricted-syntax': 'off',
                 'no-use-before-define': 'off', // using ts rule instead
+                'no-unused-prop-types': 'off',
+                'react/no-unused-prop-types': 'off',
                 'no-continue': 'off',
                 'no-plusplus': 'off',
                 'no-bitwise': 'off',
