@@ -134,7 +134,7 @@ export default function CharacterScript({ children }: Props) {
 
     useGameLoop(time => {
         // apply wobbling animation
-        wobble();
+        // wobble();
 
         // apply breathe animation
         if (!movementActive.current) {
