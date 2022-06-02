@@ -16,9 +16,15 @@ export default function TextBox(props: GameObjectProps) {
         <GameObject name="player" displayName="Player" layer="fx" {...props}>
             {/* <TextScript> */}
             <Sprite {...spriteData.player} />
-            {/* <Text color="black" anchorX="center" anchorY="middle">
-                hello world!
-            </Text> */}
+            <Text
+                scale={[10, 10, 10]}
+                color="white" // default
+                anchorX="center" // default
+                anchorY="middle" // default
+                applyMatrix4={undefined}
+            >
+                HELLO WORLD
+            </Text>
             {/* </TextScript> */}
         </GameObject>
     );
