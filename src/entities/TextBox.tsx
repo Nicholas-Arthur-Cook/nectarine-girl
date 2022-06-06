@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { extend } from 'react-three-fiber';
 import { Text } from 'drei';
 import GameObject, { GameObjectProps } from '../@core/GameObject';
-import Sprite from '../@core/Sprite';
 
 // import TextScript from '../components/TextScript';
-import spriteData from '../spriteData';
 
 extend({ Text });
 const text =
@@ -13,9 +11,8 @@ const text =
 
 export default function TextBox(props: GameObjectProps) {
     return (
-        <GameObject name="player" displayName="Player" layer="fx" {...props}>
+        <GameObject name="player" displayName="text" layer="fx" {...props}>
             {/* <TextScript> */}
-            <Sprite {...spriteData.player} />
             <Text
                 scale={[10, 10, 10]}
                 color="white" // default

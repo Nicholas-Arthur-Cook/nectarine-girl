@@ -9,7 +9,6 @@ import { mapDataString } from '../@core/utils/mapUtils';
 import Player from '../entities/Player';
 import spriteData from '../spriteData';
 import ZombiePlant from '../entities/ZombiePlant';
-import TextBox from '../entities/TextBox';
 
 const mapData = mapDataString(`
 # # # # # #
@@ -63,7 +62,6 @@ export default function OtherScene() {
                 <Interactable />
                 <ScenePortal name="start" enterDirection={[1, 0]} target="office/exit" />
             </GameObject>
-            <TextBox x={2} y={3} />
             <Player x={0} y={2} />
         </>
     );
