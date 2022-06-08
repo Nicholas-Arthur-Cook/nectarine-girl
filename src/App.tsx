@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/core';
-import React from 'react';
+import React, { useState } from 'react';
 import AssetLoader from './@core/AssetLoader';
 import Game from './@core/Game';
 import Scene from './@core/Scene';
@@ -29,6 +29,13 @@ const urls = [
 
 export default function App() {
     const [width, height] = useWindowSize();
+    const [text, setText] = useState('Hello World');
+    const [hidden, setHidden] = useState(true);
+
+    function displayMessage(inputText) {
+        setText(inputText);
+        setHidden(false);
+    }
 
     return (
         <>
@@ -46,6 +53,40 @@ export default function App() {
                         </SceneManager>
                     </AssetLoader>
                 </Game>
+            </div>
+            <div
+                hidden={hidden}
+                id="overlayContainer"
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    pointerEvents: 'none',
+                    width: '100%',
+                    height: '100%',
+                }}
+            >
+                <div
+                    className="textBox"
+                    style={{
+                        position: 'absolute',
+                        bottom: 40,
+                        left: 0,
+                        right: 0,
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        width: '50%',
+                        height: '20%',
+                        textAlign: 'center',
+                        fontSize: '18px',
+                        fontFamily: 'Courier New',
+                        border: 'solid',
+                        backgroundColor: 'black',
+                    }}
+                >
+                    {/* <style> {css} </style> */}
+                    <p id="overlayText">{text}</p>
+                </div>
             </div>
         </>
     );

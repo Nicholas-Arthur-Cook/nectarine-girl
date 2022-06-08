@@ -13,12 +13,19 @@ function WorkstationScript() {
     const workState = useRef(false);
 
     useGameObjectEvent<InteractionEvent>('interaction', () => {
-        workState.current = !workState.current;
-
-        if (workState.current) {
-            getComponent<SpriteRef>('Sprite').setState('workstation-2');
+        const el = document.getElementById('overlayContainer');
+        const txt = document.getElementById('overlayText');
+        if (el.style.display === 'none') {
+            // ✅ Shows element if hidden
+            txt.textContent =
+                'Looks like some music is on the desk. Want to listen?\n Yes     No';
+            el.style.display = 'block';
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, 4000);
         } else {
-            getComponent<SpriteRef>('Sprite').setState('workstation-1');
+            // ✅ Hides element if shown
+            el.style.display = 'none';
         }
 
         return waitForMs(400);
