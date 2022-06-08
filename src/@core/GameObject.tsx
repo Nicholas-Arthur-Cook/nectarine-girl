@@ -55,6 +55,8 @@ export interface GameObjectProps extends Partial<Position> {
     disabled?: boolean;
     persisted?: boolean;
     children?: React.ReactNode;
+    displayMessage?: Function;
+    displayQuestion?: Function;
 }
 
 export type GameObjectRef = Pick<GameObjectProps, 'name' | 'displayName'> & {

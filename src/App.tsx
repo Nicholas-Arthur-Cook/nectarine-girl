@@ -35,7 +35,20 @@ export default function App() {
     function displayMessage(inputText) {
         setText(inputText);
         setHidden(false);
+        setTimeout(() => {
+            setHidden(true);
+        }, 800);
     }
+
+    function displayQuestion(inputText) {
+        setText(inputText);
+        setHidden(false);
+    }
+
+    const textBoxProps = {
+        displayMessage,
+        displayQuestion,
+    };
 
     return (
         <>
@@ -45,7 +58,7 @@ export default function App() {
                     <AssetLoader urls={urls} placeholder="Loading assets ...">
                         <SceneManager defaultScene="office">
                             <Scene id="office">
-                                <OfficeScene />
+                                <OfficeScene {...textBoxProps} />
                             </Scene>
                             <Scene id="other">
                                 <OtherScene />

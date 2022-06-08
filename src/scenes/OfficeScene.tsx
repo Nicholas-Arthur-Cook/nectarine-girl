@@ -13,7 +13,13 @@ import Player from '../entities/Player';
 import Workstation from '../entities/Workstation';
 import spriteData from '../spriteData';
 
-const mapData = mapDataString(`
+interface Props {
+    displayMessage: Function;
+    displayQuestion: Function;
+}
+
+export default function OfficeScene(textBoxProps: Props) {
+    const mapData = mapDataString(`
 # # # # # # # # # # # # # # # # #
 # · · T # T · · · T · · · · · T #
 # · · · · · · · · · · · · · · o ·
@@ -24,60 +30,59 @@ const mapData = mapDataString(`
 # # # # # # # # # # # # # # # # #
 `);
 
-const resolveMapTile: TileMapResolver = (type, x, y) => {
-    const key = `${x}-${y}`;
-    const position = { x, y };
+    const resolveMapTile: TileMapResolver = (type, x, y) => {
+        const key = `${x}-${y}`;
+        const position = { x, y };
 
-    const floor = (
-        <GameObject key={key} {...position} layer="ground">
-            <Sprite {...spriteData.objects} state="floor" />
-        </GameObject>
-    );
+        const floor = (
+            <GameObject key={key} {...position} layer="ground">
+                <Sprite {...spriteData.objects} state="floor" />
+            </GameObject>
+        );
 
-    switch (type) {
-        case '·':
-            return floor;
-        case 'o':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <PizzaPickup {...position} />
-                </Fragment>
-            );
-        case '#':
-            return (
-                <GameObject key={key} {...position} layer="wall">
-                    <Collider />
-                    <Sprite {...spriteData.objects} state="wall" />
-                </GameObject>
-            );
-        case 'W':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <Workstation {...position} />
-                </Fragment>
-            );
-        case 'C':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <CoffeeMachine {...position} />
-                </Fragment>
-            );
-        case 'T':
-            return (
-                <Fragment key={key}>
-                    {floor}
-                    <Plant {...position} />
-                </Fragment>
-            );
-        default:
-            return null;
-    }
-};
+        switch (type) {
+            case '·':
+                return floor;
+            case 'o':
+                return (
+                    <Fragment key={key}>
+                        {floor}
+                        <PizzaPickup {...position} />
+                    </Fragment>
+                );
+            case '#':
+                return (
+                    <GameObject key={key} {...position} layer="wall">
+                        <Collider />
+                        <Sprite {...spriteData.objects} state="wall" />
+                    </GameObject>
+                );
+            case 'W':
+                return (
+                    <Fragment key={key}>
+                        {floor}
+                        <Workstation {...position} {...textBoxProps} />
+                    </Fragment>
+                );
+            case 'C':
+                return (
+                    <Fragment key={key}>
+                        {floor}
+                        <CoffeeMachine {...position} />
+                    </Fragment>
+                );
+            case 'T':
+                return (
+                    <Fragment key={key}>
+                        {floor}
+                        <Plant {...position} />
+                    </Fragment>
+                );
+            default:
+                return null;
+        }
+    };
 
-export default function OfficeScene() {
     return (
         <>
             <GameObject name="map">
