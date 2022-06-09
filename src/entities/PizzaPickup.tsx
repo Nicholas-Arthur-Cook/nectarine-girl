@@ -16,14 +16,6 @@ function DisableOnTriggerScript() {
         if (other.name === 'player') {
             getRef().setDisabled(true);
             playSfx();
-            const el = document.getElementById('overlayContainer');
-            if (el.style.display === 'none') {
-                // ✅ Shows element if hidden
-                el.style.display = 'block';
-            } else {
-                // ✅ Hides element if shown
-                el.style.display = 'none';
-            }
         }
     });
 

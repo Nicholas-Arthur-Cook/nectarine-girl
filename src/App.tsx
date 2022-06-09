@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/core';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import AssetLoader from './@core/AssetLoader';
 import Game from './@core/Game';
 import Scene from './@core/Scene';
@@ -30,18 +30,48 @@ const urls = [
 export default function App() {
     const [width, height] = useWindowSize();
     const [text, setText] = useState('Hello World');
+    const [options, setOptions] = useState([]);
+    const [highlighted, setHighlighted] = useState(5);
     const [hidden, setHidden] = useState(true);
+
+    const handleKeyDown = useCallback(
+        (event: KeyboardEvent) => {
+            if ((event.key === 'a' || event.key === 'ArrowLeft') && highlighted !== 0) {
+                setHighlighted(prev => prev - 1);
+            } else if (
+                (event.key === 'd' || event.key === 'ArrowRight') &&
+                highlighted !== options.length - 1
+            ) {
+                setHighlighted(prev => prev + 1);
+            } else if (event.key === 'Enter') {
+                // console.log(options, 'selected');
+                window.removeEventListener('keydown', handleKeyDown);
+                setHidden(true);
+            }
+        },
+        [options, highlighted]
+    );
+
+    useEffect(() => {
+        if (hidden) {
+            console.log(options[highlighted], 'selected');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [hidden, options]);
 
     function displayMessage(inputText) {
         setText(inputText);
         setHidden(false);
         setTimeout(() => {
             setHidden(true);
-        }, 800);
+        }, 1000);
     }
 
-    function displayQuestion(inputText) {
+    function displayQuestion(inputText, responses) {
         setText(inputText);
+        setOptions(responses);
+        setHighlighted(0);
+        window.addEventListener('keydown', handleKeyDown);
         setHidden(false);
     }
 
@@ -99,6 +129,23 @@ export default function App() {
                 >
                     {/* <style> {css} </style> */}
                     <p id="overlayText">{text}</p>
+                    <p id="overlayOptions">
+                        {options.map((x, id) => {
+                            if (id === highlighted) {
+                                return (
+                                    <span
+                                        key={id}
+                                        style={{
+                                            color: 'yellow',
+                                        }}
+                                    >
+                                        {`${x.text} (${id}) `}
+                                    </span>
+                                );
+                            }
+                            return <span key={id}>{`${x.text} (${id}) `}</span>;
+                        })}
+                    </p>
                 </div>
             </div>
         </>

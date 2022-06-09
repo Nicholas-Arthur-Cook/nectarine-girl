@@ -7,6 +7,7 @@ import useGameObject from '../@core/useGameObject';
 import useGameObjectEvent from '../@core/useGameObjectEvent';
 import waitForMs from '../@core/utils/waitForMs';
 import spriteData from '../spriteData';
+import useGame from '../@core/useGame';
 
 function WorkstationScript(props: GameObjectProps) {
     // TODO: Maybe refactor to not need all of GameObjectProps? Not sure if this actually affects peformance
@@ -14,6 +15,8 @@ function WorkstationScript(props: GameObjectProps) {
     const workState = useRef(false);
 
     const { displayMessage, displayQuestion } = props;
+
+    const { setPaused } = useGame();
 
     useGameObjectEvent<InteractionEvent>('interaction', () => {
         // const el = document.getElementById('overlayContainer');
@@ -31,7 +34,24 @@ function WorkstationScript(props: GameObjectProps) {
         //     el.style.display = 'none';
         // }
 
-        displayMessage('Looks like some music is on the desk!');
+        const options = [
+            {
+                text: 'Spotify',
+                func: () => {
+                    setPaused(false);
+                    console.log('spotify');
+                },
+            },
+            {
+                text: 'Apple Music',
+                func: () => {
+                    setPaused(false);
+                    console.log('Apple Music');
+                },
+            },
+        ];
+        setPaused(true);
+        displayQuestion('Looks like some music is on the desk!', options);
 
         return waitForMs(400);
     });
