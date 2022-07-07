@@ -9,6 +9,7 @@ import OfficeScene from './scenes/OfficeScene';
 import OtherScene from './scenes/OtherScene';
 import soundData from './soundData';
 import spriteData from './spriteData';
+import TextboxContext, { TextboxContextInterface } from './store/textbox-context';
 import globalStyles from './styles/global';
 
 const styles = {
@@ -86,14 +87,23 @@ export default function App() {
             <div css={styles.root(width, height)}>
                 <Game cameraZoom={80}>
                     <AssetLoader urls={urls} placeholder="Loading assets ...">
-                        <SceneManager defaultScene="office">
-                            <Scene id="office">
-                                <OfficeScene {...textBoxProps} />
-                            </Scene>
-                            <Scene id="other">
-                                <OtherScene />
-                            </Scene>
-                        </SceneManager>
+                        <TextboxContext.Provider
+                            value={{
+                                isVisible: !hidden,
+                                text,
+                                displayMessage,
+                                displayQuestion,
+                            }}
+                        >
+                            <SceneManager defaultScene="office">
+                                <Scene id="office">
+                                    <OfficeScene {...textBoxProps} />
+                                </Scene>
+                                <Scene id="other">
+                                    <OtherScene />
+                                </Scene>
+                            </SceneManager>
+                        </TextboxContext.Provider>
                     </AssetLoader>
                 </Game>
             </div>
