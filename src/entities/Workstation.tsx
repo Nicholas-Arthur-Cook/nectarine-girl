@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import TextboxContext from '../store/textbox-context';
 import Collider from '../@core/Collider';
 import GameObject, { GameObjectProps } from '../@core/GameObject';
 import Interactable, { InteractionEvent } from '../@core/Interactable';
@@ -13,8 +14,8 @@ function WorkstationScript(props: GameObjectProps) {
     // TODO: Maybe refactor to not need all of GameObjectProps? Not sure if this actually affects peformance
     const { getComponent } = useGameObject();
     const workState = useRef(false);
-
-    const { displayMessage, displayQuestion } = props;
+    const ctx = useContext(TextboxContext);
+    console.log('Context', ctx);
 
     const { setPaused } = useGame();
 
@@ -51,7 +52,7 @@ function WorkstationScript(props: GameObjectProps) {
             },
         ];
         setPaused(true);
-        displayQuestion('Looks like some music is on the desk!', options);
+        ctx.displayQuestion('Looks like some music is on the desk!', options);
 
         return waitForMs(400);
     });
