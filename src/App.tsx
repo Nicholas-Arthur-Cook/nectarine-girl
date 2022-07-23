@@ -5,6 +5,7 @@ import Game from './@core/Game';
 import Scene from './@core/Scene';
 import SceneManager from './@core/SceneManager';
 import useWindowSize from './@core/useWindowSize';
+import BedroomScene from './scenes/BedroomScene';
 import OfficeScene from './scenes/OfficeScene';
 import OtherScene from './scenes/OtherScene';
 import soundData from './soundData';
@@ -97,7 +98,7 @@ export default function App() {
                         >
                             <SceneManager defaultScene="office">
                                 <Scene id="office">
-                                    <OfficeScene {...textBoxProps} />
+                                    <BedroomScene {...textBoxProps} />
                                 </Scene>
                                 <Scene id="other">
                                     <OtherScene />

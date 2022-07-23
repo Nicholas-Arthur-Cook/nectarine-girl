@@ -1,16 +1,19 @@
 {
-  "name": "game",
+  "name": "nectarine-girl",
   "version": "1.0.0",
-  "description": "",
+  "description": "A fun website for Nectarine Girl's music information",
+  "homepage": "https://nicholas-arthur-cook.github.io/nectarine-girl",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "init": "confy-core init --env=development",
     "start": "confy-core start --env=development",
     "build": "confy-core build --env=production",
     "test": "confy-core test --env=test",
     "config": "confy-core show-config --env=development"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Nectarine", "Girl", "Nectarine Girl", "Music", "Artist", "Cyborg", "Folk"],
+  "author": "Nicholas Cook",
   "license": "ISC",
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
@@ -34,6 +37,7 @@
     "drei": "^0.0.54",
     "easystarjs": "^0.4.3",
     "fast-simplex-noise": "3.2.0",
+    "gh-pages": "^4.0.0",
     "immer": "^6.0.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

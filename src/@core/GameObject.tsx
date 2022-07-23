@@ -41,10 +41,12 @@ export type GameObjectLayer =
     | 'ground'
     | 'ground-decal'
     | 'wall'
+    | 'wall-decal'
     | 'visible-wall'
     | 'water'
     | 'obstacle'
     | 'character'
+    | 'foreground'
     | 'item'
     | 'fx';
 
@@ -175,11 +177,13 @@ export default function GameObject({
 
     // TODO: add constants for z indices
     let offsetZ = 0;
-    if (layer === 'ground') offsetZ = -1;
-    if (layer === 'ground-decal') offsetZ = 0.1;
+    if (layer === 'ground') offsetZ = -2;
+    if (layer === 'ground-decal') offsetZ = -1;
+    if (layer === 'wall-decal') offsetZ = 0.1;
     if (layer === 'obstacle') offsetZ = 0.2;
     if (layer === 'item') offsetZ = 0.3;
     if (layer === 'character') offsetZ = 0.5;
+    if (layer === 'foreground') offsetZ = 0.6;
     if (layer === 'fx') offsetZ = 4;
 
     return (
