@@ -556,6 +556,13 @@ export default function BedroomScene(textBoxProps: Props) {
                         {floor}
                     </Fragment>
                 );
+            case '¢':
+                return (
+                    <Fragment key={key}>
+                        {tile('chair', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
             default:
                 return null;
         }
@@ -569,7 +576,7 @@ V B N · f g h · Q W #
 M , . · j k l v E R #
 # D G H z x c b T Y #
 # F K L Z · O P U I #
-# · · · · · A S · · #
+# · · ¢ · · A S · · #
 < @ @ @ / | \\ @ @ @ >
 `);
 

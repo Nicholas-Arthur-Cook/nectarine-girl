@@ -118,6 +118,7 @@ const spriteData: { [index: string]: SpriteProps } = {
             dresser4: [[8, 6]],
             dresser5: [[7, 5]],
             dresser6: [[8, 5]],
+            chair: [[1, 4]],
             'workstation-1': [[0, 1]],
             'workstation-2': [[1, 1]],
             'coffee-machine': [[2, 1]],

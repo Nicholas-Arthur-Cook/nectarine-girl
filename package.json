@@ -4,7 +4,7 @@
   "description": "A fun website for Nectarine Girl's music information",
   "homepage": "https://nicholas-arthur-cook.github.io/nectarine-girl",
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "init": "confy-core init --env=development",
     "start": "confy-core start --env=development",
