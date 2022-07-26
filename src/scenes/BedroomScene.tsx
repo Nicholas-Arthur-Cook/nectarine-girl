@@ -395,17 +395,178 @@ export default function BedroomScene(textBoxProps: Props) {
                         {floor}
                     </Fragment>
                 );
+            case 'X':
+                return (
+                    <Fragment key={key}>
+                        {tile('record1', 'wall-decal', false)}
+                        {tile('wall1', 'wall', true)}
+                    </Fragment>
+                );
+            case 'C':
+                return (
+                    <Fragment key={key}>
+                        {tile('record2', 'foreground', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case 'V':
+                return (
+                    <Fragment key={key}>
+                        {tile('record3', 'wall-decal', false)}
+                        {tile('wall1', 'wall', true)}
+                    </Fragment>
+                );
+            case 'B':
+                return (
+                    <Fragment key={key}>
+                        {tile('record4', 'foreground', true)}
+                        {floor}
+                    </Fragment>
+                );
+            case 'N':
+                return (
+                    <Fragment key={key}>
+                        {tile('record5', 'foreground', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case 'M':
+                return (
+                    <Fragment key={key}>
+                        {tile('record6', 'wall-decal', false)}
+                        {tile('wall1', 'wall', true)}
+                    </Fragment>
+                );
+            case ',':
+                return (
+                    <Fragment key={key}>
+                        {tile('record7', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case '.':
+                return (
+                    <Fragment key={key}>
+                        {tile('record8', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case '!':
+                return (
+                    <Fragment key={key}>
+                        {tile('dogBed', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case '$':
+                return (
+                    <Fragment key={key}>
+                        {tile('dogFood', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case '%':
+                return (
+                    <Fragment key={key}>
+                        {tile('painting', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '^':
+                return (
+                    <Fragment key={key}>
+                        {tile('window1', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '&':
+                return (
+                    <Fragment key={key}>
+                        {tile('window2', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '*':
+                return (
+                    <Fragment key={key}>
+                        {tile('window3', 'wall-decal', false)}
+                        {tile('wall2', 'wall', true)}
+                    </Fragment>
+                );
+            case '(':
+                return (
+                    <Fragment key={key}>
+                        {tile('window4', 'wall-decal', false)}
+                        {tile('wall2', 'wall', true)}
+                    </Fragment>
+                );
+            case ')':
+                return (
+                    <Fragment key={key}>
+                        {tile('mirror1', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '-':
+                return (
+                    <Fragment key={key}>
+                        {tile('mirror2', 'wall-decal', false)}
+                        {tile('wall2', 'wall', true)}
+                    </Fragment>
+                );
+            case '_':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser1', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '=':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser2', 'wall-decal', false)}
+                        {tile('wall2', 'wall', false)}
+                    </Fragment>
+                );
+            case '+':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser3', 'wall-decal', false)}
+                        {tile('wall2', 'wall', true)}
+                    </Fragment>
+                );
+            case '~':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser4', 'wall-decal', false)}
+                        {tile('wall2', 'wall', true)}
+                    </Fragment>
+                );
+            case '¡':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser5', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
+            case '£':
+                return (
+                    <Fragment key={key}>
+                        {tile('dresser6', 'ground-decal', false)}
+                        {floor}
+                    </Fragment>
+                );
             default:
                 return null;
         }
     };
     const mapData = mapDataString(`
-[ @ @ @ q w e @ @ @ ]
-{ @ @ @ r t y @ @ @ }
-# · · d u i o · · · #
-# · · · p a s · n m #
-# · · · f g h · Q W #
-# · · · j k l v E R #
+[ % ^ & q w e ) _ = ]
+{ @ * ( r t y - + ~ }
+# ! $ d u i o · ¡ £ #
+X C · · p a s · n m #
+V B N · f g h · Q W #
+M , . · j k l v E R #
 # D G H z x c b T Y #
 # F K L Z · O P U I #
 # · · · · · A S · · #
@@ -418,12 +579,12 @@ export default function BedroomScene(textBoxProps: Props) {
                 <ambientLight />
                 <TileMap data={mapData} resolver={resolveMapTile} definesMapSize />
             </GameObject>
-            <GameObject x={5} y={-1}>
+            <GameObject x={5} y={0}>
                 <Collider />
                 <Interactable />
-                <ScenePortal name="exit" enterDirection={[0, 0]} target="other/start" />
+                <ScenePortal name="exit" enterDirection={[0, 1]} target="other/start" />
             </GameObject>
-            <Player x={6} y={3} />
+            <Player x={5} y={4} />
         </>
     );
 }

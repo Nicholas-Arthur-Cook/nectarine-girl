@@ -13,7 +13,7 @@ import ZombiePlant from '../entities/ZombiePlant';
 const mapData = mapDataString(`
 # # # # # #
 # · · · · #
-· · Z · · #
+· · · · · #
 # · · · · #
 # # # # # #
 `);
@@ -42,7 +42,7 @@ const resolveMapTile: TileMapResolver = (type, x, y) => {
             return (
                 <GameObject key={key} {...position} layer="wall">
                     <Collider />
-                    <Sprite {...spriteData.objects} state="wall" />
+                    <Sprite {...spriteData.objects} state="wall1" />
                 </GameObject>
             );
         default:
