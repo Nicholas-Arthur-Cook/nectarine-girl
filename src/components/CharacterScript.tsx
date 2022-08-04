@@ -43,6 +43,8 @@ export default function CharacterScript({ children }: Props) {
     const prevMovementActive = useRef(false);
     const currentDirection = useRef('Down');
     const prevDirection = useRef('Down');
+    const timeSinceLastMove = useRef(0);
+    const finishedMove = useRef(false);
 
     // flip sprite in the current moving direction
     const faceDirection = useCallback(
@@ -115,41 +117,59 @@ export default function CharacterScript({ children }: Props) {
         [transform]
     );
 
-    // bounce animation while moving
+    // // bounce animation while moving
     useGameObjectEvent<MovingEvent>(
         'moving',
         ({ currentPosition, nextPosition, direction, facingDirection }) => {
-            const [dirX, dirY] = direction;
-            const { x, y } = currentPosition;
-            const sizeDivider = 5;
+            finishedMove.current = false;
+            // const [dirX, dirY] = direction;
+            // const { x, y } = currentPosition;
+            // const sizeDivider = 5;
 
-            let bounce = 0;
+            // let bounce = 0;
 
-            let delta = 0;
-            if (dirX !== 0) delta = x - nextPosition.x;
-            else if (dirY !== 0) delta = (y - nextPosition.y) * -facingDirection;
+            // let delta = 0;
+            // if (dirX !== 0) delta = x - nextPosition.x;
+            // else if (dirY !== 0) delta = (y - nextPosition.y) * -facingDirection;
 
-            if (delta > 0) {
-                // left/up
-                delta = delta > 0.5 ? 1 - delta : delta;
-            } else if (delta < 0) {
-                // right/down
-                delta = delta < -0.5 ? -1 - delta : delta;
-            }
-            bounce = Math.abs(delta / sizeDivider);
-            childRef.current.position.setX(bounce * dirX);
-            childRef.current.position.setY(bounce);
+            // if (delta > 0) {
+            //     // left/up
+            //     delta = delta > 0.5 ? 1 - delta : delta;
+            // } else if (delta < 0) {
+            //     // right/down
+            //     delta = delta < -0.5 ? -1 - delta : delta;
+            // }
+            // bounce = Math.abs(delta / sizeDivider);
+            // childRef.current.position.setX(bounce * dirX);
+            // childRef.current.position.setY(bounce);
         }
     );
 
     useGameObjectEvent<DidMoveEvent>('did-move', () => {
-        movementActive.current = false;
+        finishedMove.current = true;
+        // if (timeSinceLastMove.current > 25) {
+        //     console.log('stopped moving');
+        //     movementActive.current = false;
+        //     timeSinceLastMove.current = 0;
+        // }
     });
 
     useGameLoop(time => {
         // apply wobbling animation
         // wobble();
         // apply movement transitions
+        timeSinceLastMove.current += 1;
+        if (finishedMove.current) {
+            if (timeSinceLastMove.current > 5) {
+                console.log('Finished moving');
+                finishedMove.current = false;
+                movementActive.current = false;
+                timeSinceLastMove.current = 0;
+            }
+        } else {
+            timeSinceLastMove.current = 0;
+        }
+
         if (
             currentDirection.current !== prevDirection.current ||
             movementActive.current !== prevMovementActive.current

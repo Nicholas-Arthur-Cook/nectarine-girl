@@ -17,7 +17,7 @@ const spriteData: { [index: string]: SpriteProps } = {
         src: './assets/NectarineGirl/Nectarine-Tilesheet.png',
         frameWidth: 40,
         frameHeight: 40,
-        frameTime: 100,
+        frameTime: 150,
         sheet: {
             idleDown: [
                 [0, 1],
