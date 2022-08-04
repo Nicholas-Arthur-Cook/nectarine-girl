@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import GameObject, { Position } from '../@core/GameObject';
 import Graphic from '../@core/Graphic';
 import {
@@ -40,14 +40,28 @@ export default function CharacterScript({ children }: Props) {
     const movementWobble = useRef(0);
     const movementCount = useRef(0);
     const movementActive = useRef(false);
+    const prevMovementActive = useRef(false);
+    const currentDirection = useRef('Down');
+    const prevDirection = useRef('Down');
 
     // flip sprite in the current moving direction
     const faceDirection = useCallback(
         ({ x, y }: Position): MoveDirection => {
             const sprite = getComponent<SpriteRef>('Sprite');
+            // sprite.setState('action')
             const dirX = Math.max(-1, Math.min(1, x - transform.x)) as Direction;
             const dirY = Math.max(-1, Math.min(1, y - transform.y)) as Direction;
-            if (dirX) sprite.setFlipX(dirX);
+            // if (dirX) sprite.setFlipX(dirX);
+            if (dirX === 1) {
+                currentDirection.current = 'Right';
+            } else if (dirX === -1) {
+                currentDirection.current = 'Left';
+            } else if (dirY === 1) {
+                currentDirection.current = 'Up';
+            } else if (dirY === -1) {
+                currentDirection.current = 'Down';
+            }
+
             return [dirX, dirY];
         },
         [transform, getComponent]
@@ -135,17 +149,41 @@ export default function CharacterScript({ children }: Props) {
     useGameLoop(time => {
         // apply wobbling animation
         // wobble();
-
-        // apply breathe animation
-        if (!movementActive.current) {
-            // breathe animation while standing still
-            const breathIntensity = 20;
-            scaleRef.current.scale.setY(1 + Math.sin(time / 240) / breathIntensity);
-        } else {
-            // no breathe animation while moving
-            scaleRef.current.scale.setY(1);
+        // apply movement transitions
+        if (
+            currentDirection.current !== prevDirection.current ||
+            movementActive.current !== prevMovementActive.current
+        ) {
+            const sprite = getComponent<SpriteRef>('Sprite');
+            if (!movementActive.current) {
+                // breathe animation while standing still
+                // const breathIntensity = 20;
+                // scaleRef.current.scale.setY(1 + Math.sin(time / 240) / breathIntensity);
+                sprite.setState(`idle${currentDirection.current}`);
+            } else {
+                // no breathe animation while moving
+                scaleRef.current.scale.setY(1);
+                sprite.setState(`walk${currentDirection.current}`);
+            }
+            prevDirection.current = currentDirection.current;
+            prevMovementActive.current = movementActive.current;
         }
     });
+
+    // useEffect(() => {
+    //     const sprite = getComponent<SpriteRef>('Sprite');
+    //     // apply movement transitions
+    //     if (!movementActive.current) {
+    //         // breathe animation while standing still
+    //         // const breathIntensity = 20;
+    //         // scaleRef.current.scale.setY(1 + Math.sin(time / 240) / breathIntensity);
+    //         sprite.setState(`idle${currentDirection.current}`);
+    //     } else {
+    //         // no breathe animation while moving
+    //         // scaleRef.current.scale.setY(1);
+    //         sprite.setState(`walk${currentDirection.current}`);
+    //     }
+    // }, [currentDirection.current, movementActive.current]);
 
     const offsetY = 0.5;
 

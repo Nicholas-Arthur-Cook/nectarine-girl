@@ -20,7 +20,7 @@ interface Props {
 
 export default function BedroomScene(textBoxProps: Props) {
     const resolveMapTile: TileMapResolver = (type, x, y) => {
-        const key = `${x}-${y}`;
+        const key = `${x}-${y}-${type}`;
         const position = { x, y };
 
         const floor = (
@@ -30,7 +30,7 @@ export default function BedroomScene(textBoxProps: Props) {
         );
         const tile = (tileType, layer, collidable) => {
             return (
-                <GameObject key={key} {...position} layer={layer}>
+                <GameObject key={`${tileType}-${key}`} {...position} layer={layer}>
                     {collidable && <Collider />}
                     <Sprite {...spriteData.objects} state={tileType} />
                 </GameObject>

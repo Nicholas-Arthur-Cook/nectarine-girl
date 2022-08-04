@@ -69,7 +69,8 @@ export default memo(
         const prevFrame = useRef<number>(-1);
         const frame = useRef(0);
         const frames = sheet[state];
-        const [firstFrame, lastFrame = firstFrame] = frames;
+        const firstFrame = frames[0];
+        const lastFrame = frames[frames.length - 1];
         const frameLength = lastFrame[0] + 1 - firstFrame[0];
 
         const handleFrameUpdate = useCallback(() => {
