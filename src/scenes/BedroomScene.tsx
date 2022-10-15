@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Closet from '../entities/Closet';
 import Collider from '../@core/Collider';
 import GameObject from '../@core/GameObject';
 import Interactable from '../@core/Interactable';
@@ -533,6 +534,7 @@ export default function BedroomScene(textBoxProps: Props) {
                     <Fragment key={key}>
                         {tile('dresser3', 'wall-decal', false)}
                         {tile('wall2', 'wall', true)}
+                        <Closet {...position} />
                     </Fragment>
                 );
             case '~':

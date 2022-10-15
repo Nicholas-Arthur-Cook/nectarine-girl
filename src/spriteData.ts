@@ -176,6 +176,21 @@ const spriteData: { [index: string]: SpriteProps } = {
             'zombie-plant-2': [[2, 2]],
         },
     },
+    objects2: {
+        src: './assets/objects.png',
+        frameWidth: 20,
+        frameHeight: 20,
+        sheet: {
+            'workstation-1': [[0, 1]],
+            'workstation-2': [[1, 1]],
+            'coffee-machine': [[2, 1]],
+            'coffee-machine-empty': [[3, 1]],
+            pizza: [[4, 1]],
+            plant: [[0, 2]],
+            'zombie-plant-1': [[1, 2]],
+            'zombie-plant-2': [[2, 2]],
+        },
+    },
     footstep: {
         src: './assets/footstep.png',
         sheet: {
