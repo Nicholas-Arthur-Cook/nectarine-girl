@@ -103,16 +103,16 @@ export default function CharacterScript({ children }: Props) {
             movementWobble.current = 1;
             movementActive.current = true;
 
-            const removeInstance = instantiate(
-                <GameObject x={transform.x} y={transform.y}>
-                    <Graphic
-                        {...spriteData.footstep}
-                        offset={{ x: 0, y: characterOffsetY }}
-                        onIteration={() => removeInstance()}
-                    />
-                    <Sound {...soundData.footstep} />
-                </GameObject>
-            );
+            // const removeInstance = instantiate(
+            //     <GameObject x={transform.x} y={transform.y}>
+            //         <Graphic
+            //             {...spriteData.footstep}
+            //             offset={{ x: 0, y: characterOffsetY }}
+            //             onIteration={() => removeInstance()}
+            //         />
+            //         <Sound {...soundData.footstep} />
+            //     </GameObject>
+            // );
         },
         [transform]
     );
@@ -160,7 +160,7 @@ export default function CharacterScript({ children }: Props) {
         // apply movement transitions
         timeSinceLastMove.current += 1;
         if (finishedMove.current) {
-            if (timeSinceLastMove.current > 5) {
+            if (timeSinceLastMove.current > 4) {
                 console.log('Finished moving');
                 finishedMove.current = false;
                 movementActive.current = false;
@@ -182,7 +182,7 @@ export default function CharacterScript({ children }: Props) {
                 sprite.setState(`idle${currentDirection.current}`);
             } else {
                 // no breathe animation while moving
-                scaleRef.current.scale.setY(1);
+                // scaleRef.current.scale.setY(1);
                 sprite.setState(`walk${currentDirection.current}`);
             }
             prevDirection.current = currentDirection.current;

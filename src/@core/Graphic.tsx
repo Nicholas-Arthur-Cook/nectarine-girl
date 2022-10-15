@@ -74,6 +74,7 @@ export default memo(
         const frameLength = lastFrame[0] + 1 - firstFrame[0];
 
         const handleFrameUpdate = useCallback(() => {
+            if (frame.current > frameLength - 1) frame.current = 0;
             const currentFrame = firstFrame[0] + frame.current;
             const textureOffsetX = (currentFrame * frameWidth) / image.width;
             const textureOffsetY = (firstFrame[1] * frameHeight) / image.height;
