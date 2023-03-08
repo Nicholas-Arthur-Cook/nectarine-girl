@@ -5,6 +5,7 @@ import Game from './@core/Game';
 import Scene from './@core/Scene';
 import SceneManager from './@core/SceneManager';
 import useWindowSize from './@core/useWindowSize';
+import Closet from './modals/Closet';
 import BedroomScene from './scenes/BedroomScene';
 import OfficeScene from './scenes/OfficeScene';
 import OtherScene from './scenes/OtherScene';
@@ -35,6 +36,7 @@ export default function App() {
     const [options, setOptions] = useState([]);
     const [highlighted, setHighlighted] = useState(5);
     const [hidden, setHidden] = useState(true);
+    const [closetOpen, setClosetOpen] = useState(false);
 
     const handleKeyDown = useCallback(
         (event: KeyboardEvent) => {
@@ -77,6 +79,30 @@ export default function App() {
         setHidden(false);
     }
 
+    async function displayCloset() {
+        setClosetOpen(true);
+        // const requestOptions = {
+        //     method: 'GET',
+        //     headers: {
+        //         'x-api-key': 'gy0qqef77ucxiem9suj2ar31',
+        //     },
+        // };
+        // const response = await fetch(
+        //     'https://api.etsy.com/v3/application/openapi-ping',
+        //     requestOptions
+        // );
+        // if (response.ok) {
+        //     const data = await response.json();
+        //     console.log(data);
+        // } else {
+        //     console.log('oops');
+        // }
+
+        // setTimeout(() => {
+        //     setClosetOpen(false);
+        // }, 1000);
+    }
+
     const textBoxProps = {
         displayMessage,
         displayQuestion,
@@ -94,6 +120,7 @@ export default function App() {
                                 text,
                                 displayMessage,
                                 displayQuestion,
+                                displayCloset,
                             }}
                         >
                             <SceneManager defaultScene="office">
@@ -107,6 +134,63 @@ export default function App() {
                         </TextboxContext.Provider>
                     </AssetLoader>
                 </Game>
+            </div>
+            <div
+                hidden={!closetOpen}
+                id="closetContainer"
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100%',
+                    height: '100%',
+                }}
+            >
+                <div
+                    style={{
+                        display: closetOpen ? 'flex' : 'none',
+                        position: 'relative',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        // margin: 'auto',
+                        height: '100%',
+                        aspectRatio: '352 / 320',
+                        // width: '800.797px',
+                    }}
+                >
+                    <Closet />
+                    <div
+                        role="button"
+                        onClick={() => {
+                            setClosetOpen(false);
+                        }}
+                        style={{
+                            position: 'absolute',
+                            top: 10,
+                            right: '10%',
+                            color: 'white',
+                            fontSize: '38px',
+                            zIndex: 3,
+                            // textAlign: 'right',
+                            // display: 'flex',
+                        }}
+                    >
+                        Close
+                    </div>
+                    <img
+                        height="100%"
+                        src="./assets/Room/Room_Closet.png"
+                        alt="Closet"
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            // left: 0,
+                            zIndex: 1,
+                        }}
+                    />
+                </div>
             </div>
             <div
                 hidden={hidden}

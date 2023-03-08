@@ -4,6 +4,7 @@ export interface TextboxContextInterface {
     isVisible: boolean;
     text: string;
     displayMessage: (inputText: string) => void;
+    displayCloset: () => void;
     displayQuestion: (
         inputText: string,
         responses: { text: string; func: () => void }[]

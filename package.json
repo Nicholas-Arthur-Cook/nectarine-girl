@@ -12,7 +12,15 @@
     "test": "confy-core test --env=test",
     "config": "confy-core show-config --env=development"
   },
-  "keywords": ["Nectarine", "Girl", "Nectarine Girl", "Music", "Artist", "Cyborg", "Folk"],
+  "keywords": [
+    "Nectarine",
+    "Girl",
+    "Nectarine Girl",
+    "Music",
+    "Artist",
+    "Cyborg",
+    "Folk"
+  ],
   "author": "Nicholas Cook",
   "license": "ISC",
   "devDependencies": {
@@ -33,6 +41,10 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.11",
     "animejs": "^3.1.0",
     "drei": "^0.0.54",
     "easystarjs": "^0.4.3",
