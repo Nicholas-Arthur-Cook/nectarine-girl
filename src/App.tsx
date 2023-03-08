@@ -84,11 +84,11 @@ export default function App() {
         // const requestOptions = {
         //     method: 'GET',
         //     headers: {
-        //         'x-api-key': 'gy0qqef77ucxiem9suj2ar31',
+        // 'x-api-key': '<PLACE_KEY_ENV_HERE}',
         //     },
         // };
         // const response = await fetch(
-        //     'https://api.etsy.com/v3/application/openapi-ping',
+        //     'https://api..com/v3/application/openapi-ping',
         //     requestOptions
         // );
         // if (response.ok) {
